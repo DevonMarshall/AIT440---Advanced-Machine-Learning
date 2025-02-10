@@ -1,3 +1,5 @@
+# 1-neuron neural network that can learn the relationship between two variables connected by a simple mathematical formula.
+
 import numpy as np
 import tensorflow as tf
 
