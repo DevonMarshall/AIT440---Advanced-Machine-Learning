@@ -60,7 +60,8 @@ datagen.fit(x_train)
 # Model creation
 model = Sequential([
     Input(shape=(28, 28, 1)),
-    Flatten(),  # Cant place input shape here or it causes warnings
+    # Cant place input shape inside Flatten or it causes warnings
+    Flatten(),
     Dense(128, activation='relu'),
     Dropout(0.2),  # Dropout layer to help prevent overfitting
     Dense(64, activation='relu'),
@@ -69,10 +70,6 @@ model = Sequential([
     Dense(10, activation='softmax') # Anything below 10 causes a crash
 ])
 
-# Compile the model with:
-# - Optimizer: 'adam' (efficient for many cases)
-# - Loss: 'sparse_categorical_crossentropy' (suitable for integer labels)
-# - Metrics: tracking accuracy
 model.compile(optimizer='adam',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
@@ -85,7 +82,6 @@ history = model.fit(
     validation_data=(x_val, y_val)
 )
 
-# -------------------------------------------------------------------------
 # Testing the model
 test_loss, test_acc = model.evaluate(x_test, y_test, verbose=2)
 print(f"\nTest accuracy: {test_acc:.4f}")
